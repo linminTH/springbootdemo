@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="jd-solrj:war">
+    <output-path>$PROJECT_DIR$/jd-solrj/target</output-path>
+    <root id="archive" name="jd-solrj.war">
+      <element id="artifact" artifact-name="jd-solrj:war exploded" />
+    </root>
+  </artifact>
+</component>

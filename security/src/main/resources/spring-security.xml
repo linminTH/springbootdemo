@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!--排除请求不走spring security-->
+    <http pattern="/login.html" security="none"></http>
+    <http pattern="/login_error.html" security="none"></http>
+
+
+    <!--useexpressions 表示如果是true，就表示使用SPRING的表达式SPEL-->
+    <http use-expressions="false">
+        <intercept-url pattern="/**" access="ROLE_USER"></intercept-url>
+        <!--配置通过表单提交的方式来进行登录。认证-->
+        <form-login login-page="/login.html"  default-target-url="/index.html" always-use-default-target="true" authentication-failure-url="/login_error.html"></form-login>
+        <!--禁用CSRF验证-->
+        <csrf disabled="true"></csrf>
+    </http>
+
+    <!--认证管理配置-->
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="admin" password="admin" authorities="ROLE_USER"></user>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+</beans:beans>
